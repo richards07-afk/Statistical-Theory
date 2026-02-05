@@ -1,0 +1,46 @@
+data <- c(
+  88, 45, 53, 86, 33, 86, 85, 30, 89, 53, 41, 96, 56, 38, 62,
+  71, 51, 86, 68, 29, 28, 47, 33, 37, 25, 36, 33, 94, 73, 46,
+  42, 34, 79, 72, 88, 99, 82, 62, 57, 42, 28, 55, 67, 62, 60,
+  96, 61, 57, 75, 93, 34, 75, 53, 32, 28, 73, 51, 69, 91, 35)
+
+m <- mean(data)
+s <- sd(data)
+mode <- min(as.numeric(names(table(data))[table(data) == max(table(data))]))
+skewness <- (60/((59)*(58)))*sum((data-m)^3)/s^3
+ses <- sqrt(6*60*(59)/((58)*(61)*(63)))
+kurtosis <- ((60*(61))/((59)*(58)*(57)))*sum((data-m)^4)/s^4-(3*(59)^2/((58)*(57)))
+sek <- sqrt((24*60*(59)^2)/((57)*(58)*(63)*(65)))
+
+descriptives <- data.frame(
+  Descriptive_Statistic = c(
+    "Valid", "Mode", "Median", "Mean", "Std. Deviation", "Variance",
+    "Skewness", "Std. Error of Skewness",
+    "Kurtosis", "Std. Error of Kurtosis",
+    "Minimum", "Maximum",
+    "25th percentile", "50th percentile", "75th percentile",
+    "90th percentile", "95th percentile"
+  ),
+  Scores = c(
+    length(data),
+    mode,
+    median(data),
+    m,
+    s,
+    var(data),
+    skewness,
+    ses,
+    kurtosis,
+    sek,
+    min(data),
+    max(data),
+    quantile(data, 0.25),
+    quantile(data, 0.50),
+    quantile(data, 0.75),
+    quantile(data, 0.90),
+    quantile(data, 0.95)
+  ),
+  stringsAsFactors = FALSE
+)
+
+print(descriptives, row.names = FALSE, right = FALSE)
